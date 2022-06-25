@@ -28,12 +28,12 @@ public:
   };
   
   void add(std::tm&& _departure_tm, const PNR& _pnr) {
-    auto key = make_key(&_departure_tm);
+    auto key = make_key(_departure_tm);
     m_PB.emplace(key, _pnr);
   }
 
   void add_with_check(std::tm &&_departure_tm, const PNR &_pnr) {
-    auto key = make_key(&_departure_tm);
+    auto key = make_key(_departure_tm);
     auto check_node = m_PB.find(key);
 
     if (check_node == m_PB.end())
@@ -43,7 +43,7 @@ public:
   }
 
   auto select_before(std::tm&& _departure_tm) {
-    auto key = make_key(&_departure_tm);
+    auto key = make_key(_departure_tm);
     
     return std::make_pair(m_PB.cbegin(), m_PB.lower_bound(key));
   }
